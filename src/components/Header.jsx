@@ -7,33 +7,34 @@ const Header =() => {
 
     return(
         <>
-            <div className="bg-black p-4 sm:p-5 text-white">
-  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+            <div className="bg-black text-white px-4 py-3">
+  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+    
     {/* Logo */}
-    <h1 className="text-3xl sm:text-4xl text-center sm:text-left">My Store</h1>
+    <h1 className="text-3xl text-center lg:text-left">My Store</h1>
 
     {/* Search Bar */}
     <form
       onSubmit={searchHandler}
-      className="flex flex-col sm:flex-row items-center gap-2"
+      className="flex flex-col sm:flex-row items-center gap-2 w-full lg:w-auto"
     >
       <input
         onChange={(e) => setSearchVar(e.target.value)}
-        className="w-full sm:w-64 h-10 px-2 rounded-sm text-black"
+        className="w-full sm:w-64 h-10 px-3 text-black rounded-md"
         type="search"
         name="search"
         placeholder="Search products..."
       />
       <button
         type="submit"
-        className="bg-white text-black px-4 py-2 rounded-sm hover:bg-gray-300 transition"
+        className="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-300 transition"
       >
         Search
       </button>
     </form>
 
-    {/* Nav Links */}
-    <div className="flex justify-center sm:justify-end gap-6">
+    {/* Navigation Links */}
+    <div className="flex justify-center lg:justify-end gap-6 text-lg">
       <p>
         <NavLink to="/">Products</NavLink>
       </p>
