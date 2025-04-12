@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
-import { BrowserRouter,Routes,Route, Navigate } from 'react-router-dom'
+import { HashRouter as Router,Routes,Route, Navigate } from 'react-router-dom'
 import  { earbuds, shoes, tshirts, tshirtWomen } from './components/Products'
 import Cart from './components/Cart'
 import Header from './components/Header'
@@ -14,6 +14,7 @@ import Login from './components/Login'
 import Users from './components/Users'
 import ProductDetails from './components/ProductDetails'
 import { ForgotPassword } from './components/forgotPassword'
+import PaymentSuccess from './components/PaymentSuccess'
 
 
 function App() {
@@ -84,17 +85,20 @@ function App() {
     <>
   
       <maincontext.Provider value={{products,cart,addtocart,RemoveCart,setSearchVar,searchvar,searchHandler,inr,qtyDec,qtyInc,setsingleproduct,singleproduct}}>
+        <Router>
       <Header />
         <Routes>
-          <Route path='/' element={<Home/>}/>
+          <Route path='/' element={<Login/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/search' element={<Search/>}/>
           <Route path='/product' element={<ProductDetails/>}/>
           <Route path='/register' element={<Register/>}/>
-          <Route path='/login' element={<Login/>}/>
+          <Route path='/home' element={<Home/>}/>
           <Route path='/users' element={<Users/>}/>
           <Route path='/forgotPassword' element={<ForgotPassword/>}/>
+          <Route path="/paymentsuccess" element={<PaymentSuccess />} />
         </Routes>
+        </Router>
         </maincontext.Provider>
 
     </>
