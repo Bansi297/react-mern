@@ -88,7 +88,7 @@ function App() {
         <Router>
       <Header />
         <Routes>
-          <Route path='/' element={<Login/>}/>
+          <Route path='*' element={<Login/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/search' element={<Search/>}/>
           <Route path='/product' element={<ProductDetails/>}/>
