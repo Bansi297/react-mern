@@ -14,7 +14,7 @@ import Login from './components/Login'
 import Users from './components/Users'
 import ProductDetails from './components/ProductDetails'
 import { ForgotPassword } from './components/forgotPassword'
-import PaymentSuccess from './components/PaymentSuccess'
+
 
 
 function App() {
@@ -85,10 +85,10 @@ function App() {
     <>
   
       <maincontext.Provider value={{products,cart,addtocart,RemoveCart,setSearchVar,searchvar,searchHandler,inr,qtyDec,qtyInc,setsingleproduct,singleproduct}}>
-        <Router>
+        <HashRouter>
       <Header />
         <Routes>
-          <Route path='*' element={<Login/>}/>
+          <Route path='/' element={<Login/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/search' element={<Search/>}/>
           <Route path='/product' element={<ProductDetails/>}/>
@@ -96,9 +96,9 @@ function App() {
           <Route path='/home' element={<Home/>}/>
           <Route path='/users' element={<Users/>}/>
           <Route path='/forgotPassword' element={<ForgotPassword/>}/>
-          <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+          
         </Routes>
-        </Router>
+        </HashRouter>
         </maincontext.Provider>
 
     </>
