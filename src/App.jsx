@@ -85,7 +85,7 @@ function App() {
     <>
   
       <maincontext.Provider value={{products,cart,addtocart,RemoveCart,setSearchVar,searchvar,searchHandler,inr,qtyDec,qtyInc,setsingleproduct,singleproduct}}>
-        <HashRouter>
+        <Router>
       <Header />
         <Routes>
           <Route path='/' element={<Login/>}/>
@@ -98,7 +98,7 @@ function App() {
           <Route path='/forgotPassword' element={<ForgotPassword/>}/>
           
         </Routes>
-        </HashRouter>
+        </Router>
         </maincontext.Provider>
 
     </>
