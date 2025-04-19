@@ -1,48 +1,55 @@
-import { createContext, useEffect, useState } from 'react'
-import { HashRouter as Router,Routes,Route, Navigate } from 'react-router-dom'
-import  { earbuds, shoes, tshirts, tshirtWomen } from './components/Products'
-import Cart from './components/Cart'
-import Header from './components/Header'
-export const maincontext = createContext();
-import Home from './components/Home'
-import Search from './components/Search'
-import { useNavigate } from "react-router-dom";
+import { createContext, useEffect, useState } from 'react';
+import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { PiCurrencyInrBold } from "react-icons/pi";
-import Swal from 'sweetalert2' // npm i sweetalert2
-import Register from './components/Register'
-import Login from './components/Login'
-import Users from './components/Users'
-import ProductDetails from './components/ProductDetails'
-import { ForgotPassword } from './components/forgotPassword'
+import Swal from 'sweetalert2';
 
+import { earbuds, shoes, tshirts, tshirtWomen } from './components/Products';
+import Cart from './components/Cart';
+import Header from './components/Header';
+import Home from './components/Home';
+import Search from './components/Search';
+import Register from './components/Register';
+import Login from './components/Login';
+import Users from './components/Users';
+import ProductDetails from './components/ProductDetails';
+import { ForgotPassword } from './components/forgotPassword';
 
+export const maincontext = createContext();
+
+function AppWrapper() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
 
 function App() {
-  let Navigate = useNavigate();
-  let [products, setProducts] = useState([])
-  let [cart,setCart] = useState([])
-  let [searchvar, setSearchVar] = useState([])
-  let [singleproduct,setsingleproduct] = useState({})
-  let inr = <PiCurrencyInrBold />
-  useEffect(()=>{
-    setProducts([...earbuds,...tshirts,...shoes,...tshirtWomen])
-  },[])
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [searchvar, setSearchVar] = useState([]);
+  const [singleproduct, setsingleproduct] = useState({});
+  const inr = <PiCurrencyInrBold />;
 
-  function searchHandler(e){
-    e.preventDefault()
-    Navigate('/search')
+  useEffect(() => {
+    setProducts([...earbuds, ...tshirts, ...shoes, ...tshirtWomen]);
+  }, []);
+
+  function searchHandler(e) {
+    e.preventDefault();
+    navigate('/search');
   }
-  function addtocart(id){
-    let obj = products.find((x) => x.id == id)
-    let existing = cart.find((x) => x.id == id)
-    if(existing){
-      alert('');
-    }else{
-      setCart([...cart,obj])
+
+  function addtocart(id) {
+    const obj = products.find((x) => x.id === id);
+    const existing = cart.find((x) => x.id === id);
+    if (!existing) {
+      setCart([...cart, obj]);
     }
   }
 
-  function RemoveCart(id){
+  function RemoveCart(id) {
     Swal.fire({
       title: "Are you sure?",
       text: "you want to remove this item from cart?",
@@ -53,56 +60,50 @@ function App() {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-       
-        let filteredarr =   cart.filter((x) => x.id != id)
-        setCart(filteredarr);
-        Swal.fire({
-          title: "Deleted!",
-          text: "Product Removed successfully!",
-          icon: "success"
-        });
+        const filteredArr = cart.filter((x) => x.id !== id);
+        setCart(filteredArr);
+        Swal.fire("Deleted!", "Product Removed successfully!", "success");
       }
     });
   }
 
-  function qtyInc(product){
-    let id = product.id
-    let cartproduct = cart.find((x) => x.id == id)
+  function qtyInc(product) {
+    const id = product.id;
+    const cartproduct = cart.find((x) => x.id === id);
     cartproduct.qty++;
-    setCart([...cart])
+    setCart([...cart]);
   }
-  function qtyDec(product){
-    let id = product.id
-    let  cartproduct = cart.find((x) => x.id == id)
-    if(cartproduct.qty <= 1){
-      RemoveCart(id)
-    }else{
+
+  function qtyDec(product) {
+    const id = product.id;
+    const cartproduct = cart.find((x) => x.id === id);
+    if (cartproduct.qty <= 1) {
+      RemoveCart(id);
+    } else {
       cartproduct.qty--;
-      setCart([...cart])
+      setCart([...cart]);
     }
   }
-  return (
-    <>
-  
-      <maincontext.Provider value={{products,cart,addtocart,RemoveCart,setSearchVar,searchvar,searchHandler,inr,qtyDec,qtyInc,setsingleproduct,singleproduct}}>
-        <Router>
-      <Header />
-        <Routes>
-          <Route path='/' element={<Login/>}/>
-          <Route path='/cart' element={<Cart/>}/>
-          <Route path='/search' element={<Search/>}/>
-          <Route path='/product' element={<ProductDetails/>}/>
-          <Route path='/register' element={<Register/>}/>
-          <Route path='/home' element={<Home/>}/>
-          <Route path='/users' element={<Users/>}/>
-          <Route path='/forgotPassword' element={<ForgotPassword/>}/>
-          
-        </Routes>
-        </Router>
-        </maincontext.Provider>
 
-    </>
-  )
+  return (
+    <maincontext.Provider value={{
+      products, cart, addtocart, RemoveCart,
+      setSearchVar, searchvar, searchHandler,
+      inr, qtyDec, qtyInc, setsingleproduct, singleproduct
+    }}>
+      <Header />
+      <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/search' element={<Search />} />
+        <Route path='/product' element={<ProductDetails />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/users' element={<Users />} />
+        <Route path='/forgotPassword' element={<ForgotPassword />} />
+      </Routes>
+    </maincontext.Provider>
+  );
 }
 
-export default App
+export default AppWrapper;
