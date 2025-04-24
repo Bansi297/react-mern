@@ -1,5 +1,6 @@
+// src/App.jsx
 import { createContext, useEffect, useState } from 'react';
-import { HashRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { PiCurrencyInrBold } from "react-icons/pi";
 import Swal from 'sweetalert2';
@@ -99,10 +100,4 @@ function App() {
   );
 }
 
-export default function AppWrapper() {
-  return (
-    <HashRouter>
-      <App />
-    </HashRouter>
-  );
-}
+export default App;
