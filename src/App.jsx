@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-// import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, useNavigate } from 'react-router-dom';
 
 import { PiCurrencyInrBold } from "react-icons/pi";
 import Swal from 'sweetalert2';
@@ -17,14 +16,6 @@ import ProductDetails from './components/ProductDetails';
 import { ForgotPassword } from './components/forgotPassword';
 
 export const maincontext = createContext();
-
-function AppWrapper() {
-  return (
-    <Router>
-      <App />
-    </Router>
-  );
-}
 
 function App() {
   const navigate = useNavigate();
@@ -93,7 +84,6 @@ function App() {
       setSearchVar, searchvar, searchHandler,
       inr, qtyDec, qtyInc, setsingleproduct, singleproduct
     }}>
-      <HashRouter>
       <Header />
       <Routes>
         <Route path='/' element={<Login />} />
@@ -105,9 +95,14 @@ function App() {
         <Route path='/users' element={<Users />} />
         <Route path='/forgotPassword' element={<ForgotPassword />} />
       </Routes>
-      </HashRouter>
     </maincontext.Provider>
   );
 }
 
-export default AppWrapper;
+export default function AppWrapper() {
+  return (
+    <HashRouter>
+      <App />
+    </HashRouter>
+  );
+}
