@@ -36,7 +36,7 @@ const Login =() => {
                     icon: "success",
                     confirmButtonColor: "#ffe4e6"
                   });
-          Navigate('/')
+          Navigate('/home')
         setusers({email:'',password:''})
     }
     function forgotPassword(){
