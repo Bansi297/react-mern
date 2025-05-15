@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/react-mern/",
+  base: '/react-mern/',
   plugins: [react()],
   
   // server: {   
@@ -19,4 +19,4 @@ export default defineConfig({
  
 //   plugins: [react()],
 //  base : "/react-mern/" ,
-})
+});
